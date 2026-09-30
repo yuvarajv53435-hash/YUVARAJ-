@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Your Comic</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#f5f7fb;padding:20px}
+.topbar{background:white;padding:20px 30px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.08);margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.btn{padding:12px 25px;border-radius:10px;border:none;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+.btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:white}
+.btn-success{background:linear-gradient(135deg,#56ab2f,#a8e063);color:white}
+.btn-secondary{background:#e0e0e0;color:#333}
+.comic-container{max-width:900px;margin:0 auto}
+.panel-card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.1);margin-bottom:30px;border:3px solid #000}
+.panel-header{background:linear-gradient(135deg,#ff6b6b,#feca57);padding:15px 25px;color:white;display:flex;justify-content:space-between;align-items:center}
+.panel-image{width:100%;background:#000;display:flex;justify-content:center;min-height:300px}
+.panel-image img{width:100%;max-height:600px;object-fit:contain}
+.panel-body{padding:25px}
+.scene-desc{font-style:italic;color:#666;background:#f9f9f9;padding:12px 15px;border-left:4px solid #667eea;border-radius:0 8px 8px 0;margin-bottom:15px}
+.narration{line-height:1.7;white-space:pre-wrap}
+.prompt-ref{margin-top:15px;padding:10px;background:#f0f0f0;border-radius:8px;font-size:0.8em;color:#888}
+</style>
+</head><body>
+<div class="topbar"><div><h1>📚 {{ story_prompt[:60] }}...</h1><p>Starring: <strong>{{ character_name }}</strong> | Panels: {{ layout|length }}</p></div><div><a href="/" class="btn btn-secondary">← New Comic</a> <a href="/{{ pdf_path }}" download class="btn btn-success">📥 Download PDF</a></div></div>
+<div class="comic-container">
+{% for panel in layout %}
+<div class="panel-card">
+<div class="panel-header"><h2>Panel {{ panel.panel }}: {{ panel.title }}</h2><span style="background:white;color:#333;padding:5px 12px;border-radius:20px;font-weight:700">#{{ panel.panel }}</span></div>
+<div class="panel-image"><img src="/{{ panel.image_path }}" alt="{{ panel.title }}" onerror="this.src='https://via.placeholder.com/768x512?text=Panel+{{panel.panel}}'"></div>
+<div class="panel-body"><div class="scene-desc">{{ panel.scene_description }}</div><div class="narration">{{ panel.text }}</div><div class="prompt-ref"><strong>Art Prompt:</strong> {{ panel.image_prompt }}</div></div>
+</div>
+{% endfor %}
+<div style="text-align:center;margin:40px 0"><a href="/export-success" class="btn btn-primary" style="font-size:1.2em;padding:18px 40px">🎉 Finish & Export Success</a><br><br><a href="/{{ pdf_path }}" download class="btn btn-success">📥 Download Your Comic as PDF</a></div>
+</div>
+</body></html>

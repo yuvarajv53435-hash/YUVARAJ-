@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComicCraft - AI Comic Creator</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.container{background:white;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:700px;width:100%;overflow:hidden}
+.header{background:linear-gradient(135deg,#ff6b6b,#feca57);padding:30px;text-align:center;color:white}
+.header h1{font-size:2.5em;margin-bottom:10px}
+.form-section{padding:35px}
+.form-group{margin-bottom:22px}
+label{display:block;font-weight:600;margin-bottom:8px;color:#333}
+input,textarea,select{width:100%;padding:12px 15px;border:2px solid #e0e0e0;border-radius:10px;font-size:1em}
+input:focus,textarea:focus,select:focus{border-color:#667eea;outline:none}
+textarea{min-height:100px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.btn{width:100%;padding:15px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:10px;font-size:1.2em;font-weight:700;cursor:pointer;margin-top:10px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(102,126,234,0.4)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:25px;padding-top:25px;border-top:1px solid #eee;text-align:center}
+.error{background:#fee;border:2px solid #fcc;color:#c33;padding:12px;border-radius:8px;margin-bottom:20px}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header"><h1>🎨 ComicCraft</h1><p>AI Comic Story Creator using Gemini Models</p><div style="margin-top:10px;background:rgba(255,255,255,0.2);display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.8em">Gemini Flash + Pro + Stable Diffusion</div></div>
+<div class="form-section">
+{% if error %}<div class="error">⚠️ {{ error }}</div>{% endif %}
+<form action="/generate" method="post">
+<div class="form-group"><label>📖 Story Prompt *</label><textarea name="story_prompt" required>A brave fox exploring an enchanted forest with magical creatures and hidden treasures</textarea></div>
+<div class="row">
+<div class="form-group"><label>🦸 Character Name</label><input type="text" name="character_name" value="Foxy"></div>
+<div class="form-group"><label>🌍 Setting</label><select name="setting"><option value="enchanted forest" selected>Enchanted Forest</option><option value="school">School</option><option value="space">Space</option><option value="city">City</option><option value="ocean">Ocean</option><option value="cyberpunk city">Cyberpunk City</option></select></div>
+</div>
+<div class="row">
+<div class="form-group"><label>🎭 Tone</label><select name="tone"><option value="adventurous" selected>Adventurous</option><option value="light-hearted">Light-hearted</option><option value="dramatic">Dramatic</option><option value="funny">Funny</option><option value="poetic">Poetic</option><option value="mysterious">Mysterious</option></select></div>
+<div class="form-group"><label>🎨 Art Style</label><select name="art_style"><option value="comic book" selected>Comic Book</option><option value="anime">Anime</option><option value="pixel art">Pixel Art</option><option value="realistic">Realistic</option><option value="cartoon">Cartoon</option><option value="watercolor">Watercolor</option></select></div>
+</div>
+<button type="submit" class="btn">✨ Generate My Comic - 5 Panels</button>
+</form>
+<div class="features"><div>🤖<br><small>Gemini Flash Outline</small></div><div>📝<br><small>Gemini Pro Story</small></div><div>🎨<br><small>SD Art</small></div></div>
+</div>
+</div>
+</body>
+</html>
