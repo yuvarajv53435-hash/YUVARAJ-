@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Comic — ComicCraft</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+  <main class="page-wrap">
+    <nav class="nav">
+      <a class="brand" href="/">✦ ComicCraft</a>
+      <a class="text-link" href="/">Create another ↗</a>
+    </nav>
+
+    <header class="preview-header">
+      <p class="eyebrow">YOUR STORY IS READY</p>
+      <h1>Meet <span>{{ character_name }}</span>.</h1>
+      <p>{{ prompt }}</p>
+    </header>
+
+    <section class="comic-grid">
+      {% for panel in layout %}
+        <article class="panel-card">
+          <div class="panel-top">
+            <span>CHAPTER {{ "%02d"|format(panel.panel_number) }}</span>
+            <span>✦</span>
+          </div>
+
+          <h2>{{ panel.title }}</h2>
+
+          <img
+            src="{{ panel.image_path }}"
+            alt="Illustration for {{ panel.title }}"
+          >
+
+          <p class="scene">{{ panel.scene_description }}</p>
+
+          <div class="story-copy">
+            <p class="caption">{{ panel.caption }}</p>
+            <p>{{ panel.narration }}</p>
+            <p class="dialogue">{{ panel.dialogue }}</p>
+          </div>
+
+          <details>
+            <summary>Image prompt</summary>
+            <p>{{ panel.image_prompt }}</p>
+          </details>
+        </article>
+      {% endfor %}
+    </section>
+
+    <section class="export-card">
+      <div>
+        <p class="eyebrow">TAKE YOUR STORY WITH YOU</p>
+        <h2>Keep the adventure.</h2>
+        <p>
+          Export your five panels, illustrations, and narration
+          into a printable PDF.
+        </p>
+      </div>
+
+      <a
+        class="primary button-link"
+        href="{{ pdf_url }}"
+        download
+      >
+        Download comic PDF <span>↓</span>
+      </a>
+    </section>
+
+    <footer>COMICCRAFT · EVERY GREAT STORY STARTS SOMEWHERE</footer>
+  </main>
+</body>
+</html>

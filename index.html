@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComicCraft — Dream a Comic</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="landing">
+  <main class="hero">
+    <nav class="nav">
+      <a class="brand" href="/">✦ ComicCraft</a>
+      <span>YOUR IDEAS, PANEL BY PANEL</span>
+    </nav>
+
+    <section class="intro">
+      <p class="eyebrow">AI-POWERED STORY STUDIO</p>
+      <h1>Your imagination.<br><span>In comic form.</span></h1>
+      <p class="subhead">
+        Turn a spark of an idea into a five-panel comic with story,
+        dialogue, illustrations, and a downloadable PDF.
+      </p>
+    </section>
+
+    <form class="form-card" action="/generate" method="post">
+      {% if error %}
+        <div class="error">{{ error }}</div>
+      {% endif %}
+
+      <label for="prompt">What's your story about?</label>
+      <textarea
+        id="prompt"
+        name="prompt"
+        required
+        minlength="8"
+        maxlength="1200"
+        placeholder="A brave fox discovers a hidden city beneath an enchanted forest..."
+      >{{ form.prompt if form else '' }}</textarea>
+
+      <div class="field-grid">
+        <div>
+          <label for="character_name">Main character</label>
+          <input
+            id="character_name"
+            name="character_name"
+            maxlength="60"
+            required
+            value="{{ form.character_name if form else 'Milo' }}"
+          >
+        </div>
+
+        <div>
+          <label for="setting">Setting</label>
+          <select id="setting" name="setting">
+            {% for x in [
+              'enchanted forest',
+              'school',
+              'space station',
+              'busy city',
+              'underwater kingdom',
+              'mountain village'
+            ] %}
+              <option {% if form and form.setting == x %}selected{% endif %}>{{ x }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label for="tone">Story tone</label>
+          <select id="tone" name="tone">
+            {% for x in [
+              'adventurous',
+              'funny',
+              'dramatic',
+              'light-hearted',
+              'mysterious',
+              'poetic'
+            ] %}
+              <option {% if form and form.tone == x %}selected{% endif %}>{{ x }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label for="art_style">Art style</label>
+          <select id="art_style" name="art_style">
+            {% for x in [
+              'comic book',
+              'anime',
+              'pixel art',
+              'watercolor',
+              'realistic',
+              'storybook illustration'
+            ] %}
+              <option {% if form and form.art_style == x %}selected{% endif %}>{{ x }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <button class="primary" type="submit">
+        Create my comic <span>↗</span>
+      </button>
+
+      <p class="fineprint">
+        Generation may take a little while when AI providers are enabled.
+        Demo mode works without API keys.
+      </p>
+    </form>
+
+    <footer>
+      MADE FOR STORYTELLERS · POWERED BY YOUR IMAGINATION
+    </footer>
+  </main>
+</body>
+</html>
